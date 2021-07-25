@@ -44,7 +44,20 @@ function displayWeather(response) {
   "alt", response.data.weather[0].descriptionn;
 }
 
-let apiKey = "f6e27edd666fe2993c6dd52e5b82732e";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York,usa&appid=${apiKey}&units=metric`;
+function search(city) {
+  let apiKey = "f6e27edd666fe2993c6dd52e5b82732e";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
 
-axios.get(apiUrl).then(displayWeather);
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+  console.log(cityInputElement.value);
+}
+
+search("Edinburgh");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
