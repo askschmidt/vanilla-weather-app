@@ -21,6 +21,31 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatIcon(weatherIcon) {
+  let iconLookUp = {
+    "01d": "☀️",
+    "02d": "🌤",
+    "03d": "🌥",
+    "04d": "☁️",
+    "09d": "🌧",
+    "10d": "🌧",
+    "11d": "⛈",
+    "13d": "🌨",
+    "50d": "🌫",
+    "01n": "🌑",
+    "02n": "🌘",
+    "03n": "🌥",
+    "04n": "☁️",
+    "09n": "🌧",
+    "10n": "🌧",
+    "11n": "⛈",
+    "13n": "🌨",
+    "50n": "🌫",
+  };
+  console.log(weatherIcon);
+  return iconLookUp[weatherIcon];
+}
+
 function formatForecastDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -41,11 +66,9 @@ function displayForecast(response) {
         `
   <div class="col-2">
   <div class="forecast-day">${formatForecastDay(forecastDay.dt)}</div>
-  <img
-  src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png"
-  alt=""
-  width="50"
-  />
+  <span class="forecast-icon-emoji" id="icon-emoji">${formatIcon(
+    forecastDay.weather[0].icon
+  )}</span>
   <div class="forecast-temperature">
   <span class="forecast-temperature-max"> ${Math.round(
     forecastDay.temp.max
@@ -77,7 +100,7 @@ function displayWeather(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
-  let iconElement = document.querySelector("#icon");
+  let iconEmojiElement = document.querySelector("#icon-emoji");
 
   celsiusTemperature = response.data.main.temp;
 
@@ -87,12 +110,7 @@ function displayWeather(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
-  iconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
-  );
-  iconElement.setAttribute;
-  "alt", response.data.weather[0].description;
+  iconEmojiElement.innerHTML = formatIcon(response.data.weather[0].icon);
 
   getForecast(response.data.coord);
 }

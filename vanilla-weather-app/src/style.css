@@ -45,10 +45,12 @@ li:first-letter {
   color: #505bda;
 }
 
-.weather-temperature img {
+.icon-emoji {
+  font-size: 60px;
   margin-right: 20px;
-  height: 64px;
-  width: 64px;
+  margin-top: 0px;
+  text-align: center;
+  line-height: 1;
 }
 
 .weather-temperature strong {
@@ -91,4 +93,8 @@ li:first-letter {
 
 .forecast-temperature-min {
   opacity: 0.5;
+}
+
+.forecast-icon-emoji {
+  font-size: 32px;
 }
