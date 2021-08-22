@@ -111,6 +111,10 @@ function displayWeather(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconEmojiElement.innerHTML = formatIcon(response.data.weather[0].icon);
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.remove("inactive");
+  fahrenheitLink.classList.add("inactive");
 
   getForecast(response.data.coord);
 }
